@@ -1,0 +1,1 @@
+curl -is -X GET http://localhost:3000/notes

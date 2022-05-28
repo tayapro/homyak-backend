@@ -1,0 +1,10 @@
+ADDRESS=http://localhost:3000
+curl -isS -H "Content-Type: application/json; charset=utf-8" -X POST $ADDRESS/notes -d '{"author": "Bomjara","title": "Руководство по эксплуатации хомяка","text": "Читай документацию к хомяку...","tags": []}'
+echo ''
+echo '============================='
+curl -isS -H "Content-Type: application/json; charset=utf-8" -X POST $ADDRESS/notes -d '{"author": "Stipaxa","title": "Как сварить борсч","text": "Читай поваренную книгу и будет тебе щастье...","tags": []}'
+echo ''
+echo '============================='
+curl -isS -H "Content-Type: application/json; charset=utf-8" -X POST $ADDRESS/notes -d '{"author": "Katchka","title": "Как собрать пакс","text": "Купи набор отверток и будет тебе щастье...","tags": []}'
+echo ''
+echo '============================='
