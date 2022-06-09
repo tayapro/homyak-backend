@@ -1,13 +1,19 @@
 express = require("express")
 morgan = require("morgan")
 mongoose = require("mongoose")
+jwt = require("jsonwebtoken")
+jwkToPem = require("jwk-to-pem") 
 require('dotenv').config()
+cors = require("cors")
 Note = require("./models/note")
 const app = express()
 const port = 3000
+const jwks = JSON.parse(`{"keys":[{"e":"AQAB","kid":"XooolbD0BPGABjHzSDRfQ4YBg8H87zwTJVmmP8I81OA","kty":"RSA","n":"tRXzVqY51HMCh-iK2K0YmGF044P2qM_42MDBZuk6CpqUg1Vm7ylBHLm41QWNIwvzyVtBiibjSPtT_Ua2-_6v5dz2bwZqUzxYU_yq5sacv3yfOpwe8mYej2wyaC0fBcKSigrpFj3nDHTXEUGIiR0Vptd7ja7vjOcj_8raGjaR7zGF_5P42OA-UUDmRmyU1PG_d4fV-bagip1byEcPM4GSxqOnWkJdNX9da82S9QxYSofFq9t8MYH2texM5ImcqZ0FmdUXb8k1DeBXv0dqg1ZbhaDvCzNWfgoMjhPeB5lpnCP0gR-X_3dLJDPI1lU0ddnjepCWuh48WuImxfilaoQCcw","alg":"RS256","use":"sig"}]}`)
+console.log(jwks)
 
 //in order to parse POST JSON
 app.use(express.json())
+app.use(cors())
 app.use(morgan('combined'))
 
 mongoose.connect(process.env.MONGO_URL).catch(function (err){
@@ -85,6 +91,8 @@ app.put("/notes/:id", async function(req, res){
 // List notes
 app.get("/notes", async function(req, res){
     try {
+        if(!verifyToken(req.headers))
+            return res.status(401).send()
         const all_notes = await Note.find()
         const result = all_notes.map(n => {
             return {
@@ -103,3 +111,21 @@ app.get("/notes", async function(req, res){
         res.status(400).send()
     }
 })
+
+function verifyToken(headers){
+    try{
+        const auth = headers["authorization"]
+        if(auth === undefined){
+            throw new Error("No auth header")
+        }
+        const token = auth.split(" ")[1]
+        console.log(token)
+        //const decoded_token = jwt.decode(token)
+        const decoded_token = jwt.verify(token, jwkToPem(jwks.keys[0]), { algirithms: ['RS256'] })
+        console.log(decoded_token)
+        return true
+    } catch(e) {
+        console.error("ERROR :::", e)
+        return false
+    }
+}

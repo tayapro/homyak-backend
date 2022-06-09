@@ -1,10 +1,10 @@
-ADDRESS=http://34.250.120.160:3000
-curl -isS -H "Content-Type: application/json; charset=utf-8" -X POST $ADDRESS/notes -d '{"author": "Bomjara","title": "Guide for Homyak usage","text": "Read instructiosn...","tags": ["Homyak","Kolbasa"]}'
+ADDRESS=http://34.245.135.1:3000
+curl -isS -H "Content-Type: application/json; charset=utf-8" -X POST $ADDRESS/notes -d '{"author": "Bomjara","title": "20220605_Guide for Homyak usage","text": "Read instructiosn...","tags": ["Homyak","Kolbasa"]}'
 echo ''
 echo '============================='
-curl -isS -H "Content-Type: application/json; charset=utf-8" -X POST $ADDRESS/notes -d '{"author": "Stipaxa","title": "How to cook Borsch","text": "Just cook it..."}'
+curl -isS -H "Content-Type: application/json; charset=utf-8" -X POST $ADDRESS/notes -d '{"author": "Stipaxa","title": "20220605_How to cook Borsch","text": "Just cook it..."}'
 echo ''
 echo '============================='
-curl -isS -H "Content-Type: application/json; charset=utf-8" -X POST $ADDRESS/notes -d '{"author": "Katchka","title": "How to build Pax","text": "Just buy a set of good scrudrivers...","tags": []}'
+curl -isS -H "Content-Type: application/json; charset=utf-8" -X POST $ADDRESS/notes -d '{"author": "Katchka","title": "20220605_How to build Pax","text": "Just buy a set of good scrudrivers...","tags": []}'
 echo ''
 echo '============================='
