@@ -1,5 +1,5 @@
 echo "starting Mongosh...."
-winpty docker run -it --rm \
+docker run -it --rm \
     --net homyak.net \
     --name mongosh \
     rtsp/mongosh:1.4.2 \

@@ -5,8 +5,9 @@ docker run --rm -d \
     --name mongo \
     -e MONGO_INITDB_ROOT_USERNAME="sti" \
     -e MONGO_INITDB_ROOT_PASSWORD="boss" \
-    -v C:/dev/js-tutorial/homyak.social-backend/db_data:/data/db \
     mongo:4.4
+    #-v /Users/taya/code/homyak-backend/db_data:/data/db \
+    #mongo:4.4
 
 # run in EC2
 #   docker run --rm -d \
