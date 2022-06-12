@@ -13,7 +13,14 @@ const port = 3000
 
 //in order to parse POST JSON
 app.use(express.json())
-app.use(cors())
+app.use(
+    cors({
+        origin: process.env.CORS_ALLOWED_ORIGINS
+            ? process.env.CORS_ALLOWED_ORIGINS.split(' ')
+            : '*',
+        credentials: true,
+    })
+)
 app.use(morgan('combined'))
 
 mongoose.connect(process.env.MONGO_URL).catch(function (err) {
